@@ -1,0 +1,93 @@
+﻿@model GameStore.Domain.Entities.Store.Game
+
+@{
+    ViewBag.Title = "Game";
+}
+<link href="~/Content/Main/Game.css" rel="stylesheet" />
+<style>
+    .gf {
+        background-color: #333;
+        color: white;
+        padding: 20px 0 20px 10px;
+        width: 290px;
+        margin-left:11px;
+        max-width:300px;
+    }
+    .gf p{
+        padding:0;
+        margin:2px 0 2px 0;
+    }
+ 
+</style>
+<div class="backg">
+    @if (Model.Pictures.LastOrDefault().Name.Contains("_3"))
+    {
+        @Html.Raw("<img src=\"data:image/jpeg;base64," + Convert.ToBase64String(Model.Pictures.LastOrDefault().Image) + "\" />")
+    }
+    else
+    {
+        <img src="~/Content/Image/CV6_3.jpg" id="bgImage" />
+    }
+
+</div>
+
+<div class="container-fluid ">
+    <h3>@Model.Name</h3>
+
+    <div class="row">
+        <div class=" col-12 col-xl-4 col-lg-4 center-block">
+            <div class="imageGame col-12">
+
+                @Html.Raw("<img src=\"data:image/jpeg;base64," + Convert.ToBase64String(Model.Pictures.Skip(1).FirstOrDefault().Image) + "\" />")
+            </div>
+
+            <div class="col-12 gf">
+                <p>Жанр: </p>
+                @foreach (var g in Model.Genres)
+                {
+                    <p>@g.Name</p>
+                }
+                <p>Особености: </p>
+                @foreach (var f in Model.Features)
+                {
+                    <p>@f.Name</p>
+                }
+            </div>
+        </div>
+        <div class="row col-12 col-xl-8 col-lg-8">
+            <div class="col-12 col-xl-6 col-lg-6" id="short_info">
+                <p>
+                    Разработчик: @Model.Developer.Name
+                </p>
+                <p>
+                    Дата релиза: @Model.ReleaseDate.ToShortDateString()
+                </p>
+                <p>
+                    Язык: @Model.Language
+                </p>
+                <p>
+                    Платформа: ПК
+                </p>
+            </div>
+            <div class="col-12 col-xl-6 col-lg-6">
+                <div class="price">
+                    <div class="price">
+                        @Model.Price₴
+                    </div>
+
+                </div>
+                <a class="link" href="/home/buy?name=@Model.Name.Replace(" ","").ToLower()">
+                    <button class="btnBuy">Купить</button>
+                    </a>
+            </div>
+            <div class="col-12" id="gameInfo">
+                @Html.Raw(@Model.Description)
+            </div>
+        </div>
+    </div>
+    <div class="row">
+      
+     
+    </div>
+    
+</div>

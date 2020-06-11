@@ -1,0 +1,149 @@
+﻿#carouselGameArea {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    min-width: 100%;
+    width: 100%;
+    background-color: #333;
+}
+
+.carousel-item {
+    height: 600px;
+    max-width: 1057px;
+    width: 1057px;
+    overflow: hidden;
+}
+
+    .carousel-item img {
+        margin: auto;
+        width: 1057px;
+        transition: 1s; /* Время эффекта */
+        display: block; /* Убираем небольшой отступ снизу */
+        border-radius: 5px;
+    }
+
+#carouselGame {
+    max-width: 1067px;
+    width: 100%;
+    align-content: center;
+    margin: auto;
+}
+
+
+
+    #carouselGame img:hover {
+        transform: scale(1.05);
+    }
+
+.carousel-control-prev {
+    margin-left: -150px;
+}
+
+.carousel-control-next {
+    margin-right: -150px;
+}
+
+@media (max-width: 1300px) {
+    #carouselGameArea {
+        display: none;
+    }
+}
+
+
+.game_block {
+    background-color: white;
+    padding: 7px;
+    margin-top: 5px;
+}
+
+    .game_block:hover {
+        -webkit-box-shadow: 0 0 15px rgba(0,0,0,.15);
+        box-shadow: 0 0 15px rgba(0,0,0,.15);
+        z-index: 2;
+    }
+
+.game_image {
+    margin-left: -13px;
+    height: 105px;
+    max-width: 205px;
+    width: 205px;
+    overflow: hidden;
+}
+
+    .game_image img {
+        max-width: 185px;
+        width: 185px;
+    }
+
+.game_info {
+    margin: auto;
+}
+
+p {
+    margin-right: 8px;
+}
+
+a {
+    color: black;
+}
+
+    a:hover {
+        color: black;
+        text-decoration: none;
+    }
+
+        a:hover h5 {
+            color: #990000;
+            text-decoration: none;
+        }
+
+.game_price {
+    margin: auto;
+}
+
+.game_info img {
+    margin-left: -15px;
+    margin-right: 5px;
+    margin-top: 2px;
+    width: 23px;
+    height: 23px;
+}
+
+#catalog {
+    width: 50%;
+}
+
+.tab {
+    overflow: hidden;
+    padding-left: 22%;
+    border: 1px solid #990000;
+    background-color: #f1f1f1;
+}
+
+    /* Style the buttons that are used to open the tab content */
+    .tab button {
+        background-color: inherit;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        transition: 0.3s;
+    }
+
+        /* Change background color of buttons on hover */
+        .tab button:hover {
+            background-color: #ddd;
+        }
+
+        /* Create an active/current tablink class */
+        .tab button.active {
+            color: #990000;
+        }
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}

@@ -1,0 +1,66 @@
+﻿@model GameStore.WebUI.Models.RegisterModel
+
+@{
+    ViewBag.Title = "Register";
+}
+
+<style>
+    .form-signin {
+        width: 100%;
+        max-width: 330px;
+        padding: 15px;
+        margin: auto;
+        text-align: center;
+        background-color: white;
+        margin-top: 10%;
+        border-radius: 10px;
+    }
+
+
+        .form-signin .checkbox {
+            font-weight: 400;
+        }
+
+        .form-signin .form-control {
+            position: relative;
+            box-sizing: border-box;
+            height: auto;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+            .form-signin .form-control:focus {
+                z-index: 2;
+            }
+
+        .form-signin input {
+            margin-bottom: 5px;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+    .form-signin button{
+        margin-top:30px;
+    }
+
+
+</style>
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-signin">
+
+    <img class="mb-4" src="~/Content/Image/Log.png" alt="" width="82" height="82">
+    <h1 class="h3 mb-3 font-weight-normal">Регистрация</h1>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <input type="text" id="inputName" name="Name" class="form-control" placeholder="Имя" required="" autofocus="">
+    <input type="email" id="inputEmail" name="Email" class="form-control" placeholder="Email" required="" autofocus="">
+    <input type="password" name="Password" id="inputPassword" class="form-control" placeholder="Пароль" required="">
+    <input type="password" name="ConfirmPassword" id="inputConfirmPassword" class="form-control" placeholder="Подтвердите пароль" required="">
+
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Создать</button>
+</div>
+}
+

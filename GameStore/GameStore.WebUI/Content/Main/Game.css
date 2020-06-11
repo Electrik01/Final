@@ -1,0 +1,76 @@
+﻿div {
+    border-radius: 5px;
+}
+
+.imageGame {
+    overflow: hidden;
+    width: 300px;
+    height: 450px;
+}
+
+    .imageGame img {
+        width: 300px;
+    }
+
+#gameInfo {
+    margin-top: 20px;
+    background-color: white;
+    margin-bottom: 10px;
+    height:400px;
+}
+
+.container-fluid {
+    width: 60%;
+    padding-top: 100px;
+}
+
+.backg {
+    float: left;
+    width: 100%;
+    height: 310px;
+    position: absolute;
+    overflow: hidden;
+}
+
+    .backg img {
+        width: 100%;
+    }
+
+h3 {
+    margin-top: -50px;
+    position: absolute;
+    color: white;
+}
+
+#short_info {
+    color: white;
+    opacity: 0.85;
+    background-color: #333;
+    max-height: 200px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.btnBuy {
+    margin-top: 22px;
+    background-color: #FF9933;
+    width: 100%;
+    color: white;
+    font-size: 200%;
+    height: 60px;
+    border-radius: 5px;
+    border-color: #FF9933;
+}
+
+.gf {
+    color: white;
+    height:200px;
+    background-color: #333;
+}
+.price {
+    display: inline;
+    margin-right: 30px;
+    float: right;
+    font-size: 220%;
+    color: white;
+}

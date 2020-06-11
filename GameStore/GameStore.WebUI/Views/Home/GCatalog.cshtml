@@ -1,0 +1,23 @@
+﻿@model IEnumerable<GameStore.WebUI.Models.GameShortModel>
+
+<input type="hidden" value="@Model.Count()" id="games_count"/>
+@for (var i = 0; i < 1; i++)
+{
+
+
+    foreach (var game in Model)
+    {
+        
+<div class=" col-3" align="center">
+    <a class="link" href="/home/game?name=@game.Name.Replace(" ","").ToLower()">
+
+        <div class="imageGame">
+            @Html.Raw("<img src=\"data:image/jpeg;base64," + Convert.ToBase64String(game.Picture) + "\" />")
+            <h6>
+                <span>@game.Price₴</span>
+            </h6>
+        </div>
+        </a>
+</div>
+    }
+}

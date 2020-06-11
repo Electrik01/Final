@@ -1,0 +1,138 @@
+﻿@model GameStore.Domain.Entities.Store.Game
+
+@{
+    ViewBag.Title = "Update";
+}
+
+<script src="~/Scripts/tinymce/tinymce.js"></script>
+
+<script>
+    tinymce.init({
+        selector: "textarea",
+        height: 400,
+        menubar: false,
+        plugins: [
+            'advlist autolink lists link image charmap print preview anchor',
+            'searchreplace visualblocks code fullscreen',
+            'insertdatetime media table paste code help wordcount'
+        ],
+        toolbar: 'undo redo | formatselect | ' +
+            'bold italic backcolor | alignleft aligncenter ' +
+            'alignright alignjustify | bullist numlist outdent indent | ' +
+            'removeformat | help'
+    });
+</script>
+<link href="~/Content/Main/Game.css" rel="stylesheet" />
+
+<style>
+    input {
+        border-radius: 5px;
+        width: 150px;
+    }
+
+    #Name {
+        width: 100%;
+    }
+
+    .btn_next {
+        width: 50%;
+        height: 50px;
+        margin-left: 25%;
+        margin-right: 25%;
+        background-color: #333;
+        margin-top: 30px;
+        color: white;
+        font-size: 160%;
+        font-weight: 700;
+        border: 0;
+        border-radius: 5px;
+    }
+
+    .gf {
+        width: 300px;
+        padding: 10px;
+        height: 250px;
+    }
+</style>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="backg">
+        @if (Model.Pictures.LastOrDefault().Name.Contains("_3"))
+        {
+            @Html.Raw("<img src=\"data:image/jpeg;base64," + Convert.ToBase64String(Model.Pictures.LastOrDefault().Image) + "\" />")
+        }
+        else
+        {
+            <img src="~/Content/Image/CV6_3.jpg" id="bgImage" />
+        }
+
+    </div>
+
+    <div class="container-fluid">
+        <h3>
+            <input class="text-box single-line" id="Name" name="Name" type="text" value="@Model.Name">
+        </h3>
+
+        <div class="row" id="first_row">
+            <div class="col-4">
+                <div class="imageGame ">
+
+                    @Html.Raw("<img src=\"data:image/jpeg;base64," + Convert.ToBase64String(Model.Pictures.Skip(1).FirstOrDefault().Image) + "\" />")
+
+                </div>
+                <div class="gf">
+
+                    <p>Жанр: </p>
+                    @foreach (var g in Model.Genres)
+                    {
+                        @Html.EditorFor(model => g.Name)
+                    }
+                    <p>Особености: </p>
+                    @foreach (var f in Model.Features)
+                    {
+                        <p> @Html.EditorFor(model => f.Name)</p>
+                    }
+                </div>
+
+            </div>
+            <div class="row col-8">
+                <div class="col-6" id="short_info">
+                    <p>
+                        Разработчик: @Html.EditorFor(model => model.Developer.Name)
+                    </p>
+                    <p>
+                        Дата релиза:  @Html.EditorFor(model => model.ReleaseDate, new { htmlAttributes = new { @style = "width:150px" } })
+
+                    </p>
+                    <p>
+                        Язык: @Html.EditorFor(model => model.Language)
+
+
+                    </p>
+                    <p>
+                        Платформа: ПК
+                    </p>
+                </div>
+                <div class="col-6">
+                    <div class="price">
+                        <div class="price">
+                            @Html.EditorFor(model => model.Price)
+                        </div>
+
+                    </div>
+
+                    <button class="btnBuy">Купить</button>
+                </div>
+                <div class="col-12" id="gameInfo">
+                    @Html.TextAreaFor(model => model.Description)
+                </div>
+            </div>
+        </div>
+
+        <div class=" col-12">
+            <input type="submit" value="Сохранить" class="btn btn_next" />
+        </div>
+    </div>
+
+}

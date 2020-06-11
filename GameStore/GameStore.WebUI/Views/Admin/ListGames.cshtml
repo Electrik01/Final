@@ -1,0 +1,28 @@
+﻿@model IEnumerable<GameStore.Domain.Entities.Store.Game>
+
+
+@foreach (var game in Model)
+{
+    <a class="link" href="/admin/game?name=@game.Name.Replace(" ","").ToLower()">
+        <div class="row game_block">
+            <div class="game_image col-5">
+                @Html.Raw("<img src=\"data:image/jpeg;base64," + Convert.ToBase64String(game.Pictures.FirstOrDefault().Image) + "\" />")
+            </div>
+            <div class="game_info col-5">
+                <h5>@game.Name</h5>
+                <div class="d-inline-flex col-12">
+                    <img src="~/Content/Image/steam.png" width="24" />
+                    @foreach (var item in game.Genres)
+                    {
+                        <p>@item.Name</p>
+                    }
+                </div>
+
+            </div>
+            <div class="game_price col-2">
+                <h4>@game.Price₴</h4>
+            </div>
+        </div>
+
+    </a>
+}

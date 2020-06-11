@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <style>
+        .navbar-brand {
+            padding: 0;
+            padding-top: 5px;
+        }
+
+        .navbar {
+            padding: 0;
+            padding-left: 10%;
+            padding-right:10%;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <header class="navbar navbar-expand-lg navbar-light">
+            <a class="navbar-brand" href="/Home/Index"> 
+            <img  src="~/Content/Image/Log.png"  width="50" height="50" class="d-inline-block" alt="">
+             GameTild
+         </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav_col" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="nav_col">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        @Html.ActionLink("Каталог", "Catalog", "Home", null, new { @class = "nav-link" })
+                    </li>
+
+                    @if (User.IsInRole("admin"))
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Меню админа
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                @Html.ActionLink("Статистика", "Index", "Admin", null, new { @class = "dropdown-item" })
+                                @Html.ActionLink("Список игр", "Games", "Admin", null, new { @class = "dropdown-item" })
+                                @Html.ActionLink("Добавление игры", "Create", "Admin", null, new { @class = "dropdown-item" })
+
+                            </div>
+                        </li>
+                    }
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+
+        </header>
+        <main style="padding:0">
+            
+                @RenderBody()
+</main>
+    </div>
+    <footer id="footer">
+        <div class="container-fluid" style="padding:0;">
+            <div class="row">
+                <div class="col-10"><h6>©Game Tild</h6></div>
+            </div>
+        </div>
+    </footer>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

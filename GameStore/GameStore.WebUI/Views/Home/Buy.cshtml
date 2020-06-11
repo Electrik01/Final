@@ -1,0 +1,165 @@
+﻿@model GameStore.Domain.Entities.Store.Game
+
+@{
+    ViewBag.Title = "Buy";
+}
+<style>
+
+    .container-fluid{
+        width:50%;
+        padding-top:100px;
+    }
+    .game_order {
+        overflow:hidden;
+        padding-top: 50px;
+        border-radius: 15px;
+        height: 710px;
+        background-color: white;
+    }
+    .game_image {
+        margin-left: -13px;
+        height: 210px;
+        max-width: 405px;
+        width: 405px;
+        overflow: hidden;
+    }
+
+        .game_image img {
+            max-width: 370px;
+            width: 395px;
+        }
+      #game{
+          margin-top:30px;  
+          margin-left:50px;
+          margin-right:50px;
+
+      }
+
+    .backg {
+        max-height:98%;
+        float: left;
+        width: 100%;
+        height:98%;
+        position: absolute;
+        overflow: hidden;
+    }
+
+        .backg img {
+            width: 1920px;
+            height: 98%;
+        }
+
+    .game_info p{
+        color:gray;
+        font-size:80%;
+    }
+    #first_el {
+        padding-left:40px;
+        color:white;
+        height:70px;
+        padding-top:20px;
+        background-color: #333;
+    }
+    .game_price{
+        padding-top:60px;
+        padding-left:50px;
+    }
+    #opl{
+        width:30%;
+        margin-left:10px;
+        margin-top:-3px;
+        margin-bottom:30px;
+    }
+    .oplata{
+        padding-left:50px;
+    }
+    .oplata h4{
+        margin-bottom:20px;
+    }
+    .email1{
+        margin-top:20px;
+        width:51%;
+    }
+    .btn_next {
+        width: 45%;
+        height: 50px;
+        margin: auto;
+        background-color: #333;
+        margin-top: 30px;
+        color: white;
+        font-size: 160%;
+        font-weight: 700;
+        border: 0;
+        border-radius: 5px;
+    }
+    #opl image{
+        width:10px;
+        height:10px;
+    }
+</style>
+<div class="backg">
+    @if (Model.Pictures.LastOrDefault().Name.Contains("_3"))
+    {
+        @Html.Raw("<img src=\"data:image/jpeg;base64," + Convert.ToBase64String(Model.Pictures.LastOrDefault().Image) + "\" />")
+    }
+    else
+    {
+        <img src="~/Content/Image/CV6_3.jpg" id="bgImage" />
+    }
+
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="game_order">
+                <div class="row" id="first_el">
+                    <h4> Оформление заказа </h4>
+
+                </div>
+
+                <div class="row" id="game">
+                    <div class="game_image col-5">
+                        @Html.Raw("<img src=\"data:image/jpeg;base64," + Convert.ToBase64String(Model.Pictures.FirstOrDefault().Image) + "\" />")
+                    </div>
+                    <div class="game_info col-5">
+                        <h4>@Model.Name</h4>
+                        <div class="d-inline-flex col-12">
+                            <p>Данный продукт доступен для использования и активации в следующих странах: Россия, Украина, Республика Беларусь, Казахстан, Азербайджан, Грузия, Киргизстан, Республика Молдова, Таджикистан, Туркменистан, Узбекистан.</p>
+                        </div>
+
+                    </div>
+                    <div class="game_price col-2">
+                        <h3>@Model.Price₴</h3>
+                    </div>
+                </div>
+                <hr />
+                <form method="post" action="/Home/Buy">
+                            <div class="row oplata">
+                                <input type="hidden" value="@Model.Name" name="Name" />
+                                <div class="col-12 d-inline-flex ">
+                                    <h4>Способ оплаты:</h4>
+                                    <select class="form-control selectpicker" id="opl" name="oplata">
+                                        <option data-icon="~/Content/Image/bank_card.jpg">
+                                            Банковская карта
+                                        </option>
+                                        <option>QIWI</option>
+                                        <option>WebMoney</option>
+                                    </select>
+                                </div>
+                                <hr />
+                                <div class="col-12">
+                                    <h4>Email</h4>
+                                    <input type="email" class="form-control email1" id="email" name="email" aria-describedby="emailHelp" placeholder="Введите Еmail">
+                                    <input type="email" class="form-control email1" id="email" name="emailConfirm" aria-describedby="emailHelp" placeholder="Повторите Еmail">
+
+                                </div>
+                                <input type="submit" class="btn_next" value="Далее" />
+
+                    </div>
+
+                </form>
+        </div>
+      
+    </div>
+</div>
+    </div>

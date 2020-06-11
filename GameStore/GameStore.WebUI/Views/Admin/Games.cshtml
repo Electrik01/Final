@@ -1,0 +1,48 @@
+﻿@model IEnumerable<GameStore.Domain.Entities.Store.Game>
+
+@{
+    ViewBag.Title = "Games";
+}
+<link href="~/Content/Main/Main.css" rel="stylesheet" />
+<style>
+    #catalog {
+        padding-top: 50px;
+    }
+
+    .SearchAdmin {
+        width: 40%;
+        margin-left: 61%;
+        margin-bottom: 20px;
+    }
+</style>
+<div class="container-fluid" id="catalog">
+    <input class="form-control SearchAdmin" type="text" placeholder="Поиск" aria-label="Search" id="search">
+    <div id="games"></div>
+</div>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            type: 'POST',
+            url: '/Admin/Search',
+            data: { searchLine: "" },
+            success: function (data) {
+                $("#games").html(data);
+            }
+        });
+    });
+    $("#search").on('input', function () {
+
+        let search = document.getElementById("search").value;
+        $.ajax({
+            type: 'POST',
+            url: '/Admin/Search',
+            data: { searchLine: search },
+            success: function (data) {
+                $("#games").html(data);
+            }
+        });
+    });
+</script>

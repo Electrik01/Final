@@ -1,0 +1,240 @@
+﻿@model GameStore.WebUI.Models.GameCreateModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+
+<script src="~/Scripts/tinymce/tinymce.js"></script>
+
+<script>
+    tinymce.init({
+        selector: "textarea",
+        height: 400,
+        menubar: false,
+        plugins: [
+            'advlist autolink lists link image charmap print preview anchor',
+            'searchreplace visualblocks code fullscreen',
+            'insertdatetime media table paste code help wordcount'
+        ],
+        toolbar: 'undo redo | formatselect | ' +
+            'bold italic backcolor | alignleft aligncenter ' +
+            'alignright alignjustify | bullist numlist outdent indent | ' +
+            'removeformat | help'
+    });
+</script>
+<link href="~/Content/Main/Game.css" rel="stylesheet" />
+<style>
+    input {
+        border-radius: 5px;
+    }
+
+    #Name {
+        width: 100%;
+    }
+    .container-fluid{
+        margin-top:-40px;
+        width:75%;
+    }
+    .hor .col-12{
+        margin:0;
+        padding:0;
+        margin-bottom:5px;
+
+    }
+    .col-4{
+        margin-top:20px;
+    }
+    .btn_next {
+        width: 45%;
+        height: 50px;
+        margin: auto;
+        background-color: #333;
+        margin-top: 30px;
+        color: white;
+        font-size: 160%;
+        font-weight: 700;
+        border: 0;
+        border-radius: 5px;
+    }
+    #first_el {
+        padding-left: 40px;
+        color: white;
+        height: 70px;
+        padding-top: 20px;
+        background-color: #333;
+    }
+</style>
+
+<form method="post" action="/Admin/Create" enctype="multipart/form-data">
+
+    @Html.AntiForgeryToken()
+    <div class="col-12" id="first_el">
+        <h4> Добавление игры </h4>
+
+    </div>
+    <div class="container-fluid">
+
+        <div class="row">
+
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="col-6">
+                @Html.Label("Название", htmlAttributes: new { @class = "control-label col-md-2" })
+
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+
+
+            <div class="col-3">
+
+                @Html.Label("Цена", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="col-3">
+                @Html.Label("Скидка", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.EditorFor(model => model.Discount, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Discount, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="col-9">
+                @Html.Label("Описание", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.TextAreaFor(model => model.Description)
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="col-3 hor">
+                <div class="col-12">
+                    @Html.Label("Язык", htmlAttributes: new { @class = "control-label col-md-2" })
+
+                    @Html.EditorFor(model => model.Language, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Language, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-12">
+                    @Html.Label("Разработчик", htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.EditorFor(model => model.Developer, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Developer, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-12">
+
+                    @Html.Label("Дата релиза", htmlAttributes: new { @class = "control-label col-md-12" })
+                    @Html.EditorFor(model => model.ReleaseDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ReleaseDate, "", new { @class = "text-danger" })
+
+                </div>
+                <div class="col-12">
+                    @Html.Label("1920*1080", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <input type="file" name="uploads" />
+                </div>
+                <div class="col-12">
+                    @Html.Label("800*400", htmlAttributes: new { @class = "control-label col-md-2" })
+
+                    <input type="file" name="uploads" />
+                </div>
+                <div class="col-12">
+                    @Html.Label("1920*1080", htmlAttributes: new { @class = "control-label col-md-2" })
+
+                    <input type="file" name="uploads" />
+                </div>
+            </div>
+
+            <div class="col-6">
+                @Html.Label("Жанры", htmlAttributes: new { @class = "control-label col-md-2" })
+
+                @Html.EditorFor(model => model.Genres, new { htmlAttributes = new { @class = "form-control", @placeholder = "Жанр1, Жанр2..." } })
+                @Html.ValidationMessageFor(model => model.Genres, "", new { @class = "text-danger" })
+
+            </div>
+            <div class="col-6">
+                @Html.Label("Особености", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.EditorFor(model => model.Features, new { htmlAttributes = new { @class = "form-control", @placeholder = "Особеность1, Особеность2..." } })
+                @Html.ValidationMessageFor(model => model.Features, "", new { @class = "text-danger" })
+            </div>
+
+
+
+            <input type="submit" class="btn_next" value="Создать" />
+
+        </div>
+
+    </div>
+</form>
+
+
+    @*@model GameStore.WebUI.Models.GameCreateModel
+
+    @{
+        ViewBag.Title = "Create";
+    }
+
+
+
+    <form method="post" action="/Admin/Create" enctype="multipart/form-data">
+
+
+        <div class="container-fluid">
+            <h3>
+                <input class="text-box single-line" id="Name" name="Name" type="text">
+            </h3>
+
+            <div class="row">
+                <div class="imageGame col-4">
+
+                </div>
+                <div class="row col-8">
+                    <div class="col-6" id="short_info">
+                        <p>
+                            Разработчик: @Html.EditorFor(model => model.Developer, new { htmlAttributes = new { @class = "form-control" } })
+
+                        </p>
+                        <p>
+                            Дата релиза:  @Html.EditorFor(model => model.ReleaseDate, new { htmlAttributes = new { @style = "width:150px" } })
+
+                        </p>
+                        <p>
+                            Язык: @Html.EditorFor(model => model.Language)
+
+
+                        </p>
+                        <p>
+                            Платформа: ПК
+                        </p>
+                    </div>
+                    <div class="col-6">
+                        <div class="price">
+                            <div class="price">
+                                @Html.EditorFor(model => model.Price)
+                            </div>
+
+                        </div>
+
+                        <button class="btnBuy">Купить</button>
+                    </div>
+                    <div class="col-12" id="gameInfo">
+                        @Html.TextAreaFor(model => model.Description)
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4" id="gf">
+                    <p>Жанр: </p>
+                    @Html.EditorFor(model => model.Genres, new { htmlAttributes = new { @class = "form-control" } })
+
+                    <p>Особености: </p>
+                    @Html.EditorFor(model => model.Features, new { htmlAttributes = new { @class = "form-control" } })
+
+                </div>
+
+            </div>
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+            <input type="file" name="uploads" /><br>
+            <input type="file" name="uploads" /><br>
+            <input type="file" name="uploads" /><br>
+        </div>
+
+    </form>*@

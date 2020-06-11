@@ -1,0 +1,145 @@
+﻿@model GameStore.WebUI.Models.MainGames
+
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    @@media (max-width: 1300px) {
+        #carouselGameArea {
+            display: none;
+        }
+    }
+</style>
+<link href="~/Content/Main/Main.css" rel="stylesheet" />
+
+
+<div class="container-fluid" id="carouselGameArea">
+
+    <div id="carouselGame" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                @Html.Raw("<img src=\"data:image/jpeg;base64,"
+                                + Convert.ToBase64String(Model.Leader[0].Picture) + "\" />")
+            </div>
+            @foreach (var game in Model.Leader.GetRange(1,2))
+            {
+                <div class="carousel-item ">
+                    @Html.Raw("<img src=\"data:image/jpeg;base64,"
+                                    + Convert.ToBase64String(game.Picture) + "\" />")
+                </div>
+            }
+            @*<div class="carousel-item">
+                    @Html.Raw("<img src=\"data:image/jpeg;base64,"
+                                    + Convert.ToBase64String(Model.CarouselGames[1].Picture) + "\" />")
+                </div>
+                <div class="carousel-item">
+                    @Html.Raw("<img src=\"data:image/jpeg;base64,"
+                                    + Convert.ToBase64String(Model.CarouselGames[2].Picture) + "\" />")
+                </div>
+                <div class="carousel-item">
+                    @Html.Raw("<img src=\"data:image/jpeg;base64,"
+                                    + Convert.ToBase64String(Model.CarouselGames[3].Picture) + "\" />")
+                </div>
+                <div class="carousel-item">
+                    @Html.Raw("<img src=\"data:image/jpeg;base64,"
+                                    + Convert.ToBase64String(Model.CarouselGames[4].Picture) + "\" />")
+                </div>*@
+        </div>
+        <a class="carousel-control-prev" href="#carouselGame" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselGame" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</div>
+
+
+
+
+<div class="tab">
+    <button class="tablinks" onclick="openGames(event, 'Leader')" id="defaultOpen">Лидер продаж</button>
+    <button class="tablinks" onclick="openGames(event, 'NewGame')">Новинки</button>
+</div>
+<div id="Leader" class="tabcontent">
+
+    <div class="container-fluid" id="catalog">
+        @foreach (var game in Model.Leader)
+        {
+            <a class="link" href="/home/game?name=@game.Name.Replace(" ","").ToLower()">
+                <div class="row game_block">
+                    <div class="game_image col-5">
+                        @Html.Raw("<img src=\"data:image/jpeg;base64," + Convert.ToBase64String(game.Picture) + "\" />")
+                    </div>
+                    <div class="game_info col-5">
+                        <h5>@game.Name</h5>
+                        <div class="d-inline-flex col-12">
+                            <img src="~/Content/Image/steam.png" width="24" />
+                            @foreach (var item in game.Genres)
+                            {
+                                <p>@item.Name</p>
+                            }
+                        </div>
+
+                    </div>
+                    <div class="game_price col-2">
+                        <h4>@game.Price₴</h4>
+                    </div>
+                </div>
+            </a>
+        }
+
+    </div>
+</div>
+
+<div id="NewGame" class="tabcontent">
+    <div class="container-fluid" id="catalog">
+        @foreach (var game in Model.NewGames)
+        {
+            <a class="link" href="/home/game?name=@game.Name.Replace(" ","").ToLower()">
+                <div class="row game_block">
+                    <div class="game_image col-5">
+                        @Html.Raw("<img src=\"data:image/jpeg;base64," + Convert.ToBase64String(game.Picture) + "\" />")
+                    </div>
+                    <div class="game_info col-5">
+                        <h5>@game.Name</h5>
+                        <div class="d-inline-flex col-12">
+                            <img src="~/Content/Image/steam.png" width="24" />
+                            @foreach (var item in game.Genres)
+                            {
+                                <p>@item.Name</p>
+                            }
+                        </div>
+
+                    </div>
+                    <div class="game_price col-2">
+                        <h4>@game.Price₴</h4>
+                    </div>
+                </div>
+            </a>
+        }
+
+    </div>
+</div>
+
+<script>
+
+    document.getElementById("defaultOpen").click();
+
+    function openGames(evt, gameName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+
+        document.getElementById(gameName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+</script>

@@ -1,0 +1,367 @@
+﻿@model IEnumerable<GameStore.WebUI.Models.GameShortModel>
+
+@{
+    ViewBag.Title = "Catalog";
+}
+<style>
+    .container-fluid {
+        width: 65%;
+        padding-top: 30px;
+    }
+
+    #tags {
+        height: 600px;
+        background-color: white;
+        margin-left: 25px;
+    }
+    .games col-3{
+        padding:5px;
+    }
+    .imageGame {
+        overflow: hidden;
+        padding: 0;
+        max-width: 230px;
+        width:225px;
+        height: 345px;
+        border-radius: 5px;
+        position: relative;
+        margin-top: 5px;
+    }
+
+ 
+
+    .imageGame img {
+        height: 345px;
+    }
+
+    .imageGame span {
+        border: 2px solid #990000;
+        color: black;
+        font-size: 20px;
+        line-height: 55px;
+        background: white;
+        padding: 5px;
+        padding-left: 30px;
+        padding-right: 30px;
+        border-radius: 30px;
+    }
+
+    .imageGame h6 {
+        text-align: center;
+        position: absolute;
+        top: 270px;
+        width: 100%;
+    }
+
+    .ctg {
+        background-color: white;
+        padding: 5px;
+ 
+    }
+
+    #tags {
+        position: sticky;
+        top: 10px;
+        text-align: center;
+    }
+
+        #tags a {
+            border-bottom: 3px solid #F3F0F0;
+            color: black;
+            padding: 15px 32px;
+            width: 100%;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 22px;
+            font-weight: bold;
+        }
+            #tags a:hover {
+                color: #FF9933;
+            }
+   
+
+            .imageGame:hover img {
+                transform: scale(1.1);
+                transition-timing-function: cubic-bezier(0.1, 0.8, 0.5, 2), linear;
+                transition-duration: 3s;
+                transition-delay: 0s, 1s;
+            }
+
+    #features {
+        padding-left: 10px;
+        text-align: left;
+    }
+
+    #genres {
+        padding-left: 10px;
+        text-align: left;
+    }
+
+    .col-9 {
+        border-right: 28px solid white;
+        margin-right: 2px;
+    }
+    
+    #sort1{
+     margin-bottom:10px;
+     margin-top:10px;
+    }
+        #sort1 .form-control {
+            width: 20%;
+            margin-top: -6px;
+            margin-left:5px;
+           
+        }
+        #sort1 h5 {
+            color: #FF9933;
+        }
+    .btn_next {
+        width: 90%;
+        height: 50px;
+        margin: auto;
+        background-color: #FF9933;
+        margin-top: 30px;
+        color: white;
+        font-size: 100%;
+        font-weight: 700;
+        border: 0;
+        border-radius: 5px;
+    }
+</style>
+<style>
+    .polzunok-container-5 * {
+        box-sizing: border-box;
+        outline: none;
+    }
+
+    .polzunok-container-5 {
+        padding: 10px 16px;
+        margin: 30px;
+    }
+
+        .polzunok-container-5:after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        .polzunok-container-5 .ui-slider {
+            position: relative;
+            background: #BFE2FF;
+            height: 10px;
+            border-radius: 10px;
+            box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.2), 1px 1px 5px rgba(255, 255, 255, 1);
+        }
+
+            .polzunok-container-5 .ui-slider .ui-slider-handle {
+                position: absolute;
+                margin-left: -16px;
+                width: 32px;
+                height: 32px;
+                cursor: pointer;
+                border-radius: 50%;
+                border: 4px solid #BFE2FF;
+                top: -11px;
+                background: #FFF;
+                z-index: 2;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.2), 0 4px 6px rgba(0,0,0,0.2);
+                transition: transform 0.2s, border 0.4s;
+            }
+
+                .polzunok-container-5 .ui-slider .ui-slider-handle:hover,
+                .polzunok-container-5 .ui-slider .ui-slider-handle:focus {
+                    transform: scale(1.2);
+                    border: 4px solid #337AB7;
+                }
+
+    .polzunok-input-5-left,
+    .polzunok-input-5-right {
+        height: 32px;
+        background: #FFF;
+        border-radius: 28px;
+        border: 4px solid #BFE2FF;
+        text-align: center;
+        font-size: 18px;
+        padding: 16px;
+        width: 140px;
+        margin-top: 30px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2), 0 4px 6px rgba(0,0,0,0.2);
+    }
+
+    .polzunok-input-5-left {
+        float: left;
+    }
+
+    .polzunok-input-5-right {
+        float: right;
+    }
+
+    .polzunok-container-5 .ui-slider .ui-slider-range {
+        position: absolute;
+        z-index: 1;
+        height: 10px;
+        border: 0;
+        background: #337AB7;
+        border-radius: 10px;
+        box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.3), 1px 1px 5px rgba(255, 255, 255, 1);
+    }
+</style>
+<div class="container-fluid">
+    <div class="row col-12">
+        <u><h3 id="gc"></h3></u>
+    </div>
+    <div class="row col-12  d-inline-flex" id="sort1">
+        <h5>Сортировка по: </h5>
+        <select class="form-control" id="sort">
+            <option>Умолчанию</option>
+            <option>Цена (по убыванию)</option>
+            <option>Цена (по возрастанию)</option>
+            <option>Дате релиза (по убыванию)</option>
+            <option>Дате релиза (по возрастанию)</option>
+        </select>
+    </div>
+    <div class="row">
+        <div class="row col-9 ctg" id="games">
+
+
+        </div>
+        <div class="row col-3 ">
+            <form class="col-12" id="tags">
+                <p>
+                    <a class=" dropdown-toggle disabled" data-toggle="collapse" href="#price_polzunok" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        Цена
+                    </a>
+                </p>
+                <div class="collapse disabled" id="price_polzunok">
+
+                    <div class="polzunok-container-5">
+                        <input type="text" class="polzunok-input-5-left" />
+                        <input type="text" class="polzunok-input-5-right " />
+                        <div class="polzunok-5"></div>
+                    </div>
+                </div>
+                <p>
+                    <a class=" dropdown-toggle" data-toggle="collapse" href="#genres" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        Жанры
+                    </a>
+                </p>
+                <div class="collapse" id="genres">
+                    <input type="checkbox" id="chkg" name="genres" value="Ролевые (RPG)">Ролевые (RPG)<Br>
+                    <input type="checkbox" id="chkg" name="genres" value="Экшен">Экшен<Br>
+                    <input type="checkbox" id="chkg" name="genres" value="Приключения">Приключения<Br>
+                    <input type="checkbox" id="chkg" name="genres" value="Спорт">Спорт<br />
+                    <input type="checkbox" id="chkg" name="genres" value="Стратегии">Стратегии<br />
+                </div>
+                <p>
+                    <a class="dropdown-toggle" data-toggle="collapse" href="#features" role="button" aria-expanded="false" aria-controls="collapseExample2">
+                        Особености
+                    </a>
+                </p>
+                <div class="collapse" id="features">
+
+                    <input type="checkbox" id="chkf" name="features" value="Для одного игрока">Для одного игрока<Br>
+                    <input type="checkbox" id="chkf" name="features" value="Контроллер">Контроллер<Br>
+                    <input type="checkbox" id="chkf" name="features" value="Для нескольких игроков ">Для нескольких игроков <Br>
+                    <input type="checkbox" id="chkf" name="features" value="Достижения">Достижения<br />
+
+                </div>
+                <input type="button" value="Поиск" id="search" class="btn_next" />
+            </form>
+
+        </div>
+    </div>
+
+
+</div>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<script>
+    $('#sort').on('input', function () {
+        console.log(1);
+        $("#search").click();
+    });
+    $(document).ready(function () {
+        $("#search").click();
+    });
+    $("#search").on('click', function () {
+        var features_l = new Array(), feature = document.forms['tags']['chkf'];
+        for (var i = 0, elm; elm = feature[i]; i++) {
+            if (elm.checked) {
+                features_l.push(elm.value);
+            }
+        }
+        var genres_l = new Array(), genre = document.forms['tags']['chkg'];
+        for (var i = 0, elm; elm = genre[i]; i++) {
+            if (elm.checked) {
+                genres_l.push(elm.value);
+            }
+        }
+        var sort_l = document.getElementById("sort").value;
+        console.log(sort_l);
+        //let search = document.getElementById("search").value;
+        //var sort = document.getElementById("sort").value;
+        $.ajax({
+            host: 'localhost',
+            type: 'POST',
+            url: '/Home/GameGFS',
+            data: { featuresS: features_l, genresS: genres_l, sort:sort_l },
+            success: function (data) {
+                $("#games").html(data);
+            },
+            complete: function () {
+                var value = document.getElementById("games_count").value;
+                document.getElementById("gc").textContent = ("Найдено игр: " + value);
+            }
+        });
+
+        
+    });
+</script>
+@*<script>
+    $(".polzunok-5").slider({
+        min: 0,
+        max: 5000,
+        values: [2000, 3000],
+        range: true,
+        animate: "fast",
+        slide: function (event, ui) {
+            $(".polzunok-input-5-left").val(ui.values[0]);
+            $(".polzunok-input-5-right").val(ui.values[1]);
+        }
+    });
+    $(".polzunok-input-5-left").val($(".polzunok-5").slider("values", 0));
+    $(".polzunok-input-5-right").val($(".polzunok-5").slider("values", 1));
+    $(document).focusout(function () {
+        var input_left = $(".polzunok-input-5-left").val().replace(/[^0-9]/g, ''),
+            opt_left = $(".polzunok-5").slider("option", "min"),
+            where_right = $(".polzunok-5").slider("values", 1),
+            input_right = $(".polzunok-input-5-right").val().replace(/[^0-9]/g, ''),
+            opt_right = $(".polzunok-5").slider("option", "max"),
+            where_left = $(".polzunok-5").slider("values", 0);
+        if (input_left > where_right) {
+            input_left = where_right;
+        }
+        if (input_left < opt_left) {
+            input_left = opt_left;
+        }
+        if (input_left == "") {
+            input_left = 0;
+        }
+        if (input_right < where_left) {
+            input_right = where_left;
+        }
+        if (input_right > opt_right) {
+            input_right = opt_right;
+        }
+        if (input_right == "") {
+            input_right = 0;
+        }
+        $(".polzunok-input-5-left").val(input_left);
+        $(".polzunok-input-5-right").val(input_right);
+        $(".polzunok-5").slider("values", [input_left, input_right]);
+    });
+</script>*@
+
+
